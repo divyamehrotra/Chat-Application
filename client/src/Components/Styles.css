@@ -1,0 +1,15 @@
+.main-container{
+    background-color: aliceblue;
+    height: 90vh;
+    width: 90vw;
+    display: flex;
+    border-radius: 20px;
+}
+.sidebar-container{
+    flex: 0.3;
+    border: 5px solid rebeccapurple;
+}
+.workarea-container{
+    border: 5px solid rgb(255, 99, 99);
+    flex: 0.7;
+}
