@@ -1,21 +1,19 @@
 import React, {useState} from 'react'
 import './Styles.css'
+import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import ChatArea from './ChatArea'
-import conversations from './conversations.json'
+import Welcome from './Welcome'
+import CreateGroups from './CreateGroups'
 
 function MainContainer() {
-  const[conversations,setConversations] = useState([
-    {
-      name: "Test1",
-      lastMessage: "LastMessage",
-      timeStamp: "Today"
-    },
-  ])
   return (
     <div className='main-container'>
         <Sidebar/>
-        <ChatArea props={conversations[0]}/>
+        <Outlet />
+        {/* <Welcome /> */}
+        {/* <CreateGroups /> */}
+        {/* <ChatArea/> */}
     </div>
   )
 }
