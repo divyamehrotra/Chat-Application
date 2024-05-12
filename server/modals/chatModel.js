@@ -17,7 +17,11 @@ const chatModel = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     }
-})
+},
+    {
+        timeStamp:true
+    }
+)
 
 const Chat = mongoose.Model("Chat",chatModel);
 module.exports = Chat

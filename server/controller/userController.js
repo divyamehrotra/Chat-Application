@@ -3,18 +3,25 @@ const expressAsyncHandler = require('express-async-handler')
 const generateToken = require('../config/generateToken')
 
 const loginController = expressAsyncHandler(async(req,res) => {
+    console.log(req.body)
     const {name,password} = req.body;
-    const user = userModel.findOne({name});
+    const user = await userModel.findOne({name});
+    console.log("fetched user data",user)
+    console.log(await user.matchPassword(password))
+
     if(user && (await user.matchPassword(password))){
-        res.json({
+        const response = {
             _id: user._id,
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id),
-        })
+        };
+        console.log(response)
+        res.json(response)
     }
     else{
+        res.status(401) 
         throw new Error("Invalid UserName or Password")
     }
 })
