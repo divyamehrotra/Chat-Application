@@ -24,6 +24,6 @@ app.get("/",(req,res)=>{
 })
 app.use("/user",userRoutes);
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8080
 
 app.listen(PORT, console.log('Server is running...'));
