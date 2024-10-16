@@ -14,13 +14,11 @@ import Users from './Components/Users';
 function App() {
   return (
     <div className='App'>
-      {/* <Login /> */}
-      {/* <MainContainer/> */}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="app" element={<MainContainer />}>
           <Route path="welcome" element={<Welcome />} />
-          <Route path="chat" element={<ChatArea />} />
+          <Route path="chat/:_id" element={<ChatArea />} />
           <Route path="users" element={<Users />} />
           <Route path="groups" element={<Groups />} />
           <Route path="create-groups" element={<CreateGroups />} />

@@ -13,7 +13,7 @@ function Welcome() {
   return (
     <div className='welcome-container'>
         <img src={logo} alt='logo' className='welcome-logo' />
-        <p>Hi! {userData.data.name}</p>
+        <p className='hello'>Hi! {userData.data.name} 👋 </p>
         <p> Welcome to the app</p>
     </div>
   )

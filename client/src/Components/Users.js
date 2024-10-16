@@ -6,11 +6,11 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import logo from "./logo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import { refreshSidebarFun } from "../Features/refreshSidebar";
-import { myContext } from "./MainContainer";
+import { MyContext } from "./MainContainer";
 
 function Users() {
-  const { refresh, setRefresh } = useContext(myContext);
+  const { refresh, setRefresh } = useContext(MyContext);
+
   const [users, setUsers] = useState([]);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const nav = useNavigate();
@@ -31,65 +31,72 @@ function Users() {
     axios.get("http://localhost:5000/user/fetchUsers", config).then((data) => {
       console.log("UData refreshed in Users panel ");
       setUsers(data.data);
+      // setRefresh(!refresh);
     });
   }, [refresh]);
 
   return (
-    <div className="list-container">
-      <div className={"ug-header"}>
-        <img
-          src={logo}
-          style={{ height: "2rem", width: "2rem", marginLeft: "10px" }}
-        />
-        <p className={"ug-title"}>
-          Available Users
-        </p>
-        <IconButton
-          className={"icon"}
-          onClick={() => {
-            setRefresh(!refresh);
-          }}
-        >
-          <RefreshIcon />
-        </IconButton>
-      </div>
-      <div className={"sb-search"}>
-        <IconButton className={"icon"}>
-          <SearchIcon />
-        </IconButton>
-        <input
-          placeholder="Search"
-          className={"search-box"}
-        />
-      </div>
-      <div className="ug-list">
-        {users.map((user, index) => (
-          <div
-            className={"list-tem"}
-            key={index}
+    <>
+    <div className="users_dis">
+        <div className={"ug-header"}>
+          <img
+            src={logo}
+            style={{ height: "2rem", width: "2rem", marginLeft: "10px" }}
+          />
+          <p className={"ug-title"}>
+            Available Users
+          </p>
+          <IconButton
+            className={"icon"}
             onClick={() => {
-              console.log("Creating chat with ", user.name);
-              const config = {
-                headers: {
-                  Authorization: `Bearer ${userData.data.token}`,
-                },
-              };
-              axios.post(
-                "http://localhost:8080/chat/",
-                {
-                  userId: user._id,
-                },
-                config
-              );
-              // dispatch(refreshSidebarFun());
+              setRefresh(!refresh);
             }}
           >
-            <p className={"con-icon"}>T</p>
-            <p className={"con-title"}>{user.name}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+            <RefreshIcon />
+          </IconButton>
+        </div>
+        <div className={"sb-search"}>
+          <IconButton className={"icon"}>
+            <SearchIcon />
+          </IconButton>
+          <input
+            placeholder="Search"
+            className={"search-box"}
+          />
+        </div>
+        <div className="ug-list">
+          {users.map((user, index) => {
+            return (
+              <div
+                className={"list-tem"}
+                key={index}
+                onClick={() => {
+                  console.log("Creating chat with ", user.name);
+                  const config = {
+                    headers: {
+                      Authorization: `Bearer ${userData.data.token}`,
+                    },
+                  };
+                  axios.post(
+                    "http://localhost:5000/chat/",
+                    {
+                      userId: user._id,
+                    },
+                    config
+                  );
+                  // dispatch(refreshSidebarFun());
+                }}
+              >
+                <p className={"con-icon"}>T</p>
+                <p className={"con-title"}>
+                  {user.name}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+        </div>
+        </>
   );
 }
 

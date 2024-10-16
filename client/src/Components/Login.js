@@ -28,9 +28,8 @@ function Login() {
           "Content-type": "application/json",
         },
       };
-
       const response = await axios.post(
-        "http://localhost:5000/user/login/",
+        "http://localhost:5000/user/login",
         data,
         config
       );
