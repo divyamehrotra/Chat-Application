@@ -10,9 +10,12 @@ import {
   IconButton,
 } from "@mui/material";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function CreateGroups() {
+  const lightTheme = useSelector((state) => state.themeKey);
+
   const userData = JSON.parse(localStorage.getItem("userData"));
   const nav = useNavigate();
   if (!userData) {
@@ -86,13 +89,13 @@ function CreateGroups() {
       <div className={"createGroups-container"}>
         <input
           placeholder="Enter Group Name"
-          className={"search-box"}
+          className={"search-box" + (lightTheme ? "" : " dark")}
           onChange={(e) => {
             setGroupName(e.target.value);
           }}
         />
         <IconButton
-          className={"icon"}
+          className={"icon" + (lightTheme ? "" : " dark")}
           onClick={() => {
             handleClickOpen();
           }}
