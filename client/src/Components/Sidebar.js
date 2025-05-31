@@ -113,7 +113,7 @@ function Sidebar() {
           className={"search-box" + (lightTheme ? "" : " dark")}
         />
       </div>
-      <div className={"sb-conversations"}>
+      <div className={"sb-conversations"+ + (lightTheme ? "" : " dark")}>
         {conversations.map((conversation, index) => {
           if (conversation.users.length === 1) {
             return <div key={index}></div>;
@@ -142,11 +142,11 @@ function Sidebar() {
                   <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name[0]}
                   </p>
-                  <p className={"con-title"}>
+                  <p className={"con-title" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name}
                   </p>
 
-                  <p className="con-lastMessage">
+                  <p className={"con-lastMessage" + (lightTheme ? "" : " dark")}>
                     No previous Messages, click here to start a new chat
                   </p>
                 </div>
@@ -156,13 +156,13 @@ function Sidebar() {
             return (
               <div
                 key={index}
-                className="conversation-container"
+                className={"conversation-container" + (lightTheme ? "" : " dark")}
                 onClick={() => {
                   navigate(
                     "chat/" +
                       conversation._id +
                       "&" +
-                      conversation.users[1].name
+                      conversation.users.name
                   );
                 }}
               >
@@ -174,7 +174,7 @@ function Sidebar() {
                   {conversation.users[1].name}
                 </p>
 
-                <p className="con-lastMessage">
+                <p className={"con-lastMessage" + (lightTheme ? "" : " dark")}>
                   {conversation.latestMessage.content}
                 </p>
               </div>

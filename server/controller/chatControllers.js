@@ -107,6 +107,7 @@ const createGroupChat = asyncHandler(async (req, res) => {
   }
 });
 
+
 const groupExit = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
 
@@ -136,4 +137,4 @@ module.exports = {
   fetchGroups,
   createGroupChat,
   groupExit,
-};
+};2
