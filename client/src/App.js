@@ -9,11 +9,14 @@ import MainContainer from './Components/MainContainer';
 import Welcome from './Components/Welcome';
 import Groups from './Components/Groups';
 import Users from './Components/Users';
+import { useDispatch, useSelector } from "react-redux";
 
 
 function App() {
+  const dispatch = useDispatch();
+  const lightTheme = useSelector((state) => state.themeKey);
   return (
-    <div className='App'>
+    <div className={"App" + (lightTheme ? "" : "-dark")}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="app" element={<MainContainer />}>

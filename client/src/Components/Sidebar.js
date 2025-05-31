@@ -4,14 +4,21 @@ import { IconButton } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import NightlightIcon from "@mui/icons-material/Nightlight";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MyContext } from "./MainContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../Features/themeSlice";
+import { refreshSidebarFun } from "../Features/refreshSidebar";
 
 function Sidebar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const  lightTheme = useSelector((state) => state.themeKey);
   const { refresh, setRefresh } = useContext(MyContext);
   console.log("Context API : refresh : ", refresh);
   const [conversations, setConversations] = useState([]);
@@ -38,7 +45,7 @@ function Sidebar() {
 
   return (
     <div className="sidebar-container">
-      <div className={"sb-header"}>
+      <div className={"sb-header" + (lightTheme ? "" : " dark")}>
         <div className="other-icons">
           <IconButton
             onClick={() => {
@@ -46,7 +53,7 @@ function Sidebar() {
             }}
           >
             <AccountCircleIcon
-              className={"icon"}
+              className={"icon" + (lightTheme ? "" : " dark")}
             />
           </IconButton>
 
@@ -55,21 +62,37 @@ function Sidebar() {
               navigate("users");
             }}
           >
-            <PersonAddIcon className={"icon"} />
+          <PersonAddIcon className={"icon" + (lightTheme ? "" : " dark")} />
           </IconButton>
           <IconButton
             onClick={() => {
               navigate("groups");
             }}
           >
-            <GroupAddIcon className={"icon"} />
+            <GroupAddIcon className={"icon" + (lightTheme ? "" : " dark")} />
           </IconButton>
           <IconButton
             onClick={() => {
               navigate("create-groups");
             }}
           >
-            <AddCircleIcon className={"icon"} />
+          <AddCircleIcon className={"icon" + (lightTheme ? "" : " dark")} />
+
+          <IconButton
+            onClick={() => {
+              dispatch(toggleTheme());
+            }}
+          >
+            {lightTheme && (
+              <NightlightIcon
+                className={"icon" + (lightTheme ? "" : " dark")}
+              />
+            )}
+            {!lightTheme && (
+              <LightModeIcon className={"icon" + (lightTheme ? "" : " dark")} />
+            )}
+          </IconButton>
+
           </IconButton>
           <IconButton
             onClick={() => {
@@ -77,17 +100,17 @@ function Sidebar() {
               navigate("/");
             }}
           >
-            <ExitToAppIcon className={"icon"} />
+            <ExitToAppIcon className={"icon" + (lightTheme ? "" : " dark")} />
           </IconButton>
         </div>
       </div>
-      <div className={"sb-search"}>
-        <IconButton className={"icon"}>
+      <div className={"sb-search" + (lightTheme ? "" : " dark")}>
+        <IconButton className={"icon" + (lightTheme ? "" : " dark")}>
           <SearchIcon />
         </IconButton>
         <input
           placeholder="Search"
-          className={"search-box"}
+          className={"search-box" + (lightTheme ? "" : " dark")}
         />
       </div>
       <div className={"sb-conversations"}>
@@ -116,7 +139,7 @@ function Sidebar() {
                     );
                   }}
                 >
-                  <p className={"con-icon"}>
+                  <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                     {conversation.users[1].name[0]}
                   </p>
                   <p className={"con-title"}>
@@ -143,10 +166,11 @@ function Sidebar() {
                   );
                 }}
               >
-                <p className={"con-icon"}>
+          
+                <p className={"con-icon" + (lightTheme ? "" : " dark")}>
                   {conversation.users[1].name[0]}
                 </p>
-                <p className={"con-title"}>
+                <p className={"con-title" + (lightTheme ? "" : " dark")}>
                   {conversation.users[1].name}
                 </p>
 
