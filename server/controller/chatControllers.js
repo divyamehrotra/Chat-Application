@@ -50,7 +50,7 @@ const accessChat = asyncHandler(async (req, res) => {
 
 const fetchChats = asyncHandler(async (req, res) => {
   try {
-    console.log("Fetch Chats aPI : ", req);
+    console.log("Fetch Chats API : ", req);
     Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
@@ -109,8 +109,6 @@ const createGroupChat = asyncHandler(async (req, res) => {
 
 const groupExit = asyncHandler(async (req, res) => {
   const { chatId, userId } = req.body;
-
-  // check if the requester is admin
 
   const removed = await Chat.findByIdAndUpdate(
     chatId,

@@ -9,7 +9,7 @@ const chatModel = mongoose.Schema({
             ref: "User"
         }
     ],
-    lates2tMessage: {
+    latestMessage: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Message"
     },
@@ -22,5 +22,5 @@ const chatModel = mongoose.Schema({
     timestamps: true
 });
 
-const Chat = mongoose.model("Chat", chatModel); // Change this line to mongoose.model
+const Chat = mongoose.model("Chat", chatModel); 
 module.exports = Chat;

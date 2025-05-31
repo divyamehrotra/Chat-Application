@@ -44,7 +44,7 @@ const registerController = expressAsyncHandler(async (req,res) => {
         throw new Error("UserName already taken");
     }
 
-    //create an entry
+    //create an entry in db
     const user = await userModel.create({name,email,password});
     if(user){
         res.status(201).json({
